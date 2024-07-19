@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://telegra.ph/file/4cf337052c09eec06f3e8.jpg" type="image/x-icon">
+    <title>GITHUB REPO SEARCH | CRAWL</title>
+    <style>
+        @keyframes rgb {
+            0% { color: blue; }
+            50% { color: yellow; }
+            100% { color: red; }
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #000000;
+            padding: 20px;
+            box-shadow: 0 0 10px rgb(255, 255, 255);
+            border-radius: 10px;
+        }
+        h1 {
+            animation: rgb 5s infinite;
+            text-align: center;
+        }
+        .repo {
+            border-bottom: 1px solid #ffffff;
+            box-shadow: 0 0 10px rgb(255, 255, 255);
+            padding: 10px 10px 20px 10px;
+            animation: border-rgb 5s infinite;
+            border-width: 2px;
+            border-style: solid;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .repo a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .repo p {
+            margin: 5px 0;
+            color: #aaa;
+        }
+        .repo .counts {
+            margin-top: 10px;
+            color: #ddd;
+        }
+        .repo .button-container {
+            margin-top: 10px;
+            text-align: right;
+        }
+        .repo .button-container button {
+            padding: 10px 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #0366d6;
+            color: white;
+            cursor: pointer;
+        }
+        input, button {
+            padding: 20px;
+            font-size: 20px;
+            margin: 100px 10px;
+            border-bottom: 10px;
+            border-radius: 100px;
+        }
+        button {
+            background-color: #2600ff;
+            color: white;
+            cursor: pointer;
+        }
+
+        footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: #000000; /* Darker gray footer background */
+        color: #ffffff;
+        padding: 10px 0;
+        text-align: center;
+        font-size: 15px; /* Smaller font size */    
+        }    
+       
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>GITHUB REPO SEARCH | CRAWL</h1>
+        <input type="text" id="usernameInput" placeholder="GitHub පරිශීලක නාමය ඇතුළු කරන්න...">
+        <button onclick="fetchRepos()">SEARCH</button>
+        <div id="results"></div>
+    </div>
+    <script>
+        function fetchRepos() {
+            const username = document.getElementById('usernameInput').value;
+            fetch(`https://api.github.com/users/${username}/repos`)
+                .then(response => response.json())
+                .then(data => {
+                    const resultsDiv = document.getElementById('results');
+                    resultsDiv.innerHTML = '';
+                    data.forEach(repo => {
+                        const repoDiv = document.createElement('div');
+                        repoDiv.classList.add('repo');
+                        repoDiv.innerHTML = `
+                            <a href="${repo.html_url}" target="_blank">${repo.name}</a>
+                            <p>${repo.description || 'No description'}</p>
+                            <div class="counts">
+                                <span>⭐ ${repo.stargazers_count} stars</span> | 
+                                <span>🍴 ${repo.forks_count} forks</span>
+                            </div>
+                            <div class="button-container">
+                                <a href="${repo.html_url}" target="_blank">
+                                    <button>View Repository</button>
+                                </a>
+                            </div>
+                           
+                        `;
+                        resultsDiv.appendChild(repoDiv);
+                    });
+                });
+        }
+    </script>
+    <center>
+  <footer>
+    CRAWL-MD 2024 &copy; <span id="currentYear"></span>
+  </footer>
+        </center>
+</body>
+</html>
