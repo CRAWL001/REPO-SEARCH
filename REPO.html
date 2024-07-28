@@ -54,6 +54,7 @@
         }
         .repo .counts {
             margin-top: 10px;
+            font-size: 10px;
             color: #ddd;
         }
         .repo .button-container {
@@ -65,15 +66,15 @@
             font-size: 16px;
             border: none;
             border-radius: 5px;
-            background-color: #0366d6;
+            background-color: #4f04ff;
             color: white;
             cursor: pointer;
         }
         input, button {
             padding: 20px;
             font-size: 20px;
-            margin: 100px 10px;
-            border-bottom: 10px;
+            margin: 100px 15px;
+            border-bottom: 100px;
             border-radius: 100px;
         }
         button {
@@ -99,7 +100,7 @@
 <body>
     <div class="container">
         <h1>GITHUB REPO SEARCH | CRAWL</h1>
-        <input type="text" id="usernameInput" placeholder="GitHub පරිශීලක නාමය ඇතුළු කරන්න...">
+        <input type="text" id="usernameInput" placeholder="GITHUB USERNAME...">
         <button onclick="fetchRepos()">SEARCH</button>
         <div id="results"></div>
     </div>
